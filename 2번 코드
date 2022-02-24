@@ -23,12 +23,7 @@ void loop(){
   duration = pulseIn(echoPin, HIGH);
   cm = (duration/2)/29.1;
 
-  if(cm < 30){
-    myservo.write(90);
-  }
-  else{
-    myservo.write(0);
-  }
+  // 이곳을 채워 코드를 완성하세요!
 
   Serial.print(cm);
   Serial.println("cm");
