@@ -1,0 +1,36 @@
+#include <Servo.h>
+Servo myservo;
+
+int trigPin = 7;
+int echoPin = 6;
+long duration;
+float cm;
+int servo_pin = 2;
+
+void setup(){
+  Serial.begin(9600);
+  myservo.attach(servo_pin);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+}
+
+void loop(){
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(5);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  cm = (duration/2)/29.1;
+
+  if(cm < 30){
+    myservo.write(90);
+  }
+  else{
+    myservo.write(0);
+  }
+
+  Serial.print(cm);
+  Serial.println("cm");
+  delay(250);
+}
